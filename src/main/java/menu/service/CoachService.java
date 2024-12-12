@@ -41,6 +41,13 @@ public class CoachService {
         }
     }
 
+    public List<Coach> recommendMenu(List<Coach> coaches, List<String> categories) {
+        for (Coach coach : coaches) {
+            coach.recommendMenu(categories);
+        }
+        return coaches;
+    }
+
     private void validateCoach(String[] split) {
         if (split.length < MIN_COACH_LENGTH || split.length > MAX_COACH_LENGTH) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());

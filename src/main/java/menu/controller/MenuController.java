@@ -26,7 +26,7 @@ public class MenuController {
         for (Coach coach : coaches) {
             readNotPreferredFood(coach);
         }
-        List<String> categories = selectCategory();
+        recommendMenu(coaches);
     }
 
     public List<Coach> readCoach() {
@@ -51,8 +51,11 @@ public class MenuController {
         }
     }
 
-    public List<String> selectCategory() {
-        return menuService.selectCategories();
+    public void recommendMenu(List<Coach> coaches) {
+        List<String> categories = menuService.selectCategories();
+        coachService.recommendMenu(coaches, categories);
+        outputView.printCategories(categories);
+        outputView.printRecommendedMenu(coaches);
     }
 
     private <T> T retry(Supplier<T> supplier) {

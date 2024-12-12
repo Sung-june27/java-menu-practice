@@ -26,6 +26,11 @@ public enum Food {
         throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
     }
 
+    public static List<String> foodsFromCategory(String category) {
+        Food food = Food.valueOf(category);
+        return food.foods;
+    }
+
     public String getCategory() {
         return category;
     }
