@@ -15,4 +15,8 @@ public class Coach {
     public String getName() {
         return name;
     }
+
+    public void addNotPreferredFood(String food) {
+        notPreferredFood.add(food);
+    }
 }

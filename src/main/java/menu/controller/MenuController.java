@@ -20,6 +20,9 @@ public class MenuController {
 
     public void run() {
         List<Coach> coaches = readCoach();
+        for (Coach coach : coaches) {
+            readNotPreferredFood(coach);
+        }
     }
 
     public List<Coach> readCoach() {
@@ -27,6 +30,21 @@ public class MenuController {
             String input = inputView.readCoach();
             return coachService.initCoaches(input);
         });
+    }
+
+    public void readNotPreferredFood(Coach coach) {
+//        retry(() -> {
+//            String input = inputView.readNotPreferredFood(coach);
+//            return coachService.addNotPreferredFood(coach, input);
+//        });
+        while (true) {
+            try {
+                String input = inputView.readNotPreferredFood(coach);
+                coachService.addNotPreferredFood(coach, input);
+            } catch (IllegalArgumentException e) {
+                outputView.printError(e.getMessage());
+            }
+        }
     }
 
     private <T> T retry(Supplier<T> supplier) {
