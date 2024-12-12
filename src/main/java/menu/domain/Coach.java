@@ -5,25 +5,25 @@ import java.util.List;
 
 public class Coach {
     private final String name;
-    private final List<String> notPreferredFood = new ArrayList<>();
-    private final List<String> recommendedFood = new ArrayList<>();
+    private final List<String> inedibleFoods = new ArrayList<>();
+    private final List<String> recommendedFoods = new ArrayList<>();
 
     public Coach(String name) {
         this.name = name;
     }
 
     public void addNotPreferredFood(String food) {
-        notPreferredFood.add(food);
+        inedibleFoods.add(food);
     }
 
     public boolean addRecommendedFood(String food) {
-        if (recommendedFood.contains(food)) {
+        if (recommendedFoods.contains(food)) {
             return false;
         }
-        if (notPreferredFood.contains(food)) {
+        if (inedibleFoods.contains(food)) {
             return false;
         }
-        recommendedFood.add(food);
+        recommendedFoods.add(food);
         return true;
     }
 
@@ -31,7 +31,7 @@ public class Coach {
         return name;
     }
 
-    public List<String> getRecommendedFood() {
-        return recommendedFood;
+    public List<String> getRecommendedFoods() {
+        return recommendedFoods;
     }
 }

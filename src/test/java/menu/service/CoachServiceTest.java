@@ -13,7 +13,7 @@ class CoachServiceTest {
     @Test
     void 먹지_못하는_음식_추가_테스트() {
         Coach coach = new Coach("성준");
-        coachService.addNotPreferredFood(coach, "된장찌개,비빔밥");
+        coachService.addInedibleFoods(coach, "된장찌개,비빔밥");
         assertThat(coach).extracting("notPreferredFood")
                 .isEqualTo(List.of("된장찌개", "비빔밥"));
     }
@@ -21,7 +21,7 @@ class CoachServiceTest {
     @Test
     void 먹지_못하는_음식_예외_테스트() {
         Coach coach = new Coach("성준");
-        assertThatThrownBy(() -> coachService.addNotPreferredFood(coach, "버거킹,비빔밥"))
+        assertThatThrownBy(() -> coachService.addInedibleFoods(coach, "버거킹,비빔밥"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

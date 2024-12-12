@@ -12,7 +12,7 @@ public class InputView {
         return Console.readLine();
     }
 
-    public String readNotPreferredFood(Coach coach) {
+    public String readInedibleFoods(Coach coach) {
         System.out.printf(NOT_PREFERRED_FOOD_PROMPT, coach.getName());
         return Console.readLine();
     }

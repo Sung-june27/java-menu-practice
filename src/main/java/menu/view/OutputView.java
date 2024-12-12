@@ -23,7 +23,7 @@ public class OutputView {
 
     public void printRecommendedMenu(List<Coach> coaches) {
         for (Coach coach : coaches) {
-            List<String> recommendedFood = coach.getRecommendedFood();
+            List<String> recommendedFood = coach.getRecommendedFoods();
             System.out.printf(MENU_FORMAT, coach.getName(), recommendedFood.get(0), recommendedFood.get(1),
                     recommendedFood.get(2), recommendedFood.get(3), recommendedFood.get(4));
             printNewLine();

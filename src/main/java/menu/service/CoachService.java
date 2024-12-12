@@ -1,23 +1,21 @@
 package menu.service;
 
+import static menu.service.constant.CoachConstants.DELIMITER;
+import static menu.service.constant.CoachConstants.MAX_COACH_LENGTH;
+import static menu.service.constant.CoachConstants.MAX_INEDIBLE_FOOD_COUNT;
+import static menu.service.constant.CoachConstants.MIN_COACH_LENGTH;
+import static menu.service.constant.CoachConstants.MIN_INEDIBLE_FOOD_COUNT;
+
 import camp.nextstep.edu.missionutils.Randoms;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import menu.service.constant.CoachConstants;
 import menu.constant.ErrorMessage;
 import menu.constant.Food;
 import menu.domain.Coach;
 
 public class CoachService {
-    private final int MIN_COACH_LENGTH = 2;
-    private final int MAX_COACH_LENGTH = 5;
-    private final int MIN_NAME_LENGTH = 2;
-    private final int MAX_NAME_LENGTH = 4;
-    private final int MIN_NOT_PREFERRED_FOOD = 0;
-    private final int MAX_NOT_PREFERRED_FOOD = 2;
-    private final String DELIMITER = ",";
-
     public List<Coach> initCoaches(String input) {
         String[] split = input.split(DELIMITER);
         validateCoach(split);
@@ -26,12 +24,13 @@ public class CoachService {
                 .collect(Collectors.toList());
     }
 
-    public void addNotPreferredFood(Coach coach, String input) {
+    public Coach addInedibleFoods(Coach coach, String input) {
         String[] split = input.split(DELIMITER);
         validateNotPreferredFood(split);
         for (String food : split) {
             coach.addNotPreferredFood(food);
         }
+        return coach;
     }
 
     public List<Coach> recommendMenu(List<Coach> coaches, List<String> categories) {
@@ -53,7 +52,7 @@ public class CoachService {
     }
 
     private void validateNotPreferredFood(String[] split) {
-        if (split.length < MIN_NOT_PREFERRED_FOOD || split.length > MAX_NOT_PREFERRED_FOOD) {
+        if (split.length < MIN_INEDIBLE_FOOD_COUNT || split.length > MAX_INEDIBLE_FOOD_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
         }
         for (String food : split) {
@@ -67,7 +66,7 @@ public class CoachService {
         }
 
         boolean validLength = Arrays.stream(split)
-                .anyMatch(str -> str.length() < MIN_NAME_LENGTH || str.length() > MAX_NAME_LENGTH);
+                .anyMatch(str -> str.length() < CoachConstants.MIN_NAME_LENGTH || str.length() > CoachConstants.MAX_NAME_LENGTH);
         if (validLength) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
         }

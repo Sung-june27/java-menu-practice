@@ -24,7 +24,7 @@ public class MenuController {
     public void run() {
         List<Coach> coaches = readCoach();
         for (Coach coach : coaches) {
-            readNotPreferredFood(coach);
+            readInedibleFoods(coach);
         }
         recommendMenu(coaches);
     }
@@ -37,20 +37,11 @@ public class MenuController {
         });
     }
 
-    public void readNotPreferredFood(Coach coach) {
-//        retry(() -> {
-//            String input = inputView.readNotPreferredFood(coach);
-//            return coachService.addNotPreferredFood(coach, input);
-//        });
-        while (true) {
-            try {
-                String input = inputView.readNotPreferredFood(coach);
-                coachService.addNotPreferredFood(coach, input);
-                return;
-            } catch (IllegalArgumentException e) {
-                outputView.printError(e.getMessage());
-            }
-        }
+    public void readInedibleFoods(Coach coach) {
+        retry(() -> {
+            String input = inputView.readInedibleFoods(coach);
+            return coachService.addInedibleFoods(coach, input);
+        });
     }
 
     public void recommendMenu(List<Coach> coaches) {
