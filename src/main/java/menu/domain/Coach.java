@@ -20,6 +20,9 @@ public class Coach {
         if (recommendedFood.contains(food)) {
             return false;
         }
+        if (notPreferredFood.contains(food)) {
+            return false;
+        }
         recommendedFood.add(food);
         return true;
     }
