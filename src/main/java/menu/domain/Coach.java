@@ -1,9 +1,7 @@
 package menu.domain;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
-import menu.constant.Food;
 
 public class Coach {
     private final String name;
@@ -18,16 +16,12 @@ public class Coach {
         notPreferredFood.add(food);
     }
 
-    public void recommendMenu(List<String> categories) {
-        for (int i = 0; i < categories.size(); i++) {
-            List<String> foods = Food.foodsFromCategory(categories.get(i));
-            String food = Randoms.shuffle(foods).get(0);
-            if (recommendedFood.contains(food)) {
-                i--;
-                continue;
-            }
-            recommendedFood.add(food);
+    public boolean addRecommendedFood(String food) {
+        if (recommendedFood.contains(food)) {
+            return false;
         }
+        recommendedFood.add(food);
+        return true;
     }
 
     public String getName() {

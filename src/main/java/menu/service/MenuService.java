@@ -12,7 +12,7 @@ public class MenuService {
     public List<String> selectCategories() {
         Food[] foods = Food.values();
         for (int i = 0; i < 5; i++) {
-            int idx = Randoms.pickNumberInRange(0, 4);
+            int idx = Randoms.pickNumberInRange(1, 5) - 1;
             String category = foods[idx].getCategory();
             if (countCategory(category) > 1) {
                 i--;

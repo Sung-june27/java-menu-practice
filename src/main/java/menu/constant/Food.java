@@ -27,8 +27,17 @@ public enum Food {
     }
 
     public static List<String> foodsFromCategory(String category) {
-        Food food = Food.valueOf(category);
+        Food food = Food.fromCategory(category);
         return food.foods;
+    }
+
+    public static Food fromCategory(String category) {
+        for (Food food : Food.values()) {
+            if (food.category.equals(category)) {
+                return food;
+            }
+        }
+        throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
     }
 
     public String getCategory() {

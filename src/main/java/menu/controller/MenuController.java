@@ -30,6 +30,7 @@ public class MenuController {
     }
 
     public List<Coach> readCoach() {
+        outputView.printWelcome();
         return retry(() -> {
             String input = inputView.readCoach();
             return coachService.initCoaches(input);
@@ -45,6 +46,7 @@ public class MenuController {
             try {
                 String input = inputView.readNotPreferredFood(coach);
                 coachService.addNotPreferredFood(coach, input);
+                return;
             } catch (IllegalArgumentException e) {
                 outputView.printError(e.getMessage());
             }

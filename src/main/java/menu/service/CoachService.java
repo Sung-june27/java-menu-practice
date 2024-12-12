@@ -1,5 +1,7 @@
 package menu.service;
 
+import camp.nextstep.edu.missionutils.Randoms;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,6 +34,24 @@ public class CoachService {
         }
     }
 
+    public List<Coach> recommendMenu(List<Coach> coaches, List<String> categories) {
+        for (int i = 0; i < categories.size(); i++) {
+            List<String> foods = Food.foodsFromCategory(categories.get(i));
+            recommendFood(coaches, foods);
+        }
+        return coaches;
+    }
+
+    private void recommendFood(List<Coach> coaches, List<String> foods) {
+        for (int i = 0; i < coaches.size(); i++) {
+            Coach coach = coaches.get(i);
+            String food = Randoms.shuffle(foods).get(0);
+            if (!coach.addRecommendedFood(food)) {
+                i--;
+            }
+        }
+    }
+
     private void validateNotPreferredFood(String[] split) {
         if (split.length < MIN_NOT_PREFERRED_FOOD || split.length > MAX_NOT_PREFERRED_FOOD) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
@@ -41,13 +61,6 @@ public class CoachService {
         }
     }
 
-    public List<Coach> recommendMenu(List<Coach> coaches, List<String> categories) {
-        for (Coach coach : coaches) {
-            coach.recommendMenu(categories);
-        }
-        return coaches;
-    }
-
     private void validateCoach(String[] split) {
         if (split.length < MIN_COACH_LENGTH || split.length > MAX_COACH_LENGTH) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
@@ -55,7 +68,7 @@ public class CoachService {
 
         boolean validLength = Arrays.stream(split)
                 .anyMatch(str -> str.length() < MIN_NAME_LENGTH || str.length() > MAX_NAME_LENGTH);
-        if (!validLength) {
+        if (validLength) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
         }
     }
