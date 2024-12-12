@@ -24,8 +24,10 @@ public class OutputView {
     public void printRecommendedMenu(List<Coach> coaches) {
         for (Coach coach : coaches) {
             List<String> recommendedFood = coach.getRecommendedFoods();
-            System.out.printf(MENU_FORMAT, coach.getName(), recommendedFood.get(0), recommendedFood.get(1),
-                    recommendedFood.get(2), recommendedFood.get(3), recommendedFood.get(4));
+            String menus = String.join(" | ", recommendedFood);
+//            System.out.printf(MENU_FORMAT, coach.getName(), recommendedFood.get(0), recommendedFood.get(1),
+//                    recommendedFood.get(2), recommendedFood.get(3), recommendedFood.get(4));
+            System.out.printf("[ %s | %s ]", coach.getName(), menus);
             printNewLine();
         }
         System.out.println(END_MESSAGE);
