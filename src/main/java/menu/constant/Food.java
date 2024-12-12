@@ -25,4 +25,8 @@ public enum Food {
         }
         throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
     }
+
+    public String getCategory() {
+        return category;
+    }
 }

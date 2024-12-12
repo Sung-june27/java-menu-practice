@@ -4,16 +4,19 @@ import java.util.List;
 import java.util.function.Supplier;
 import menu.domain.Coach;
 import menu.service.CoachService;
+import menu.service.MenuService;
 import menu.view.InputView;
 import menu.view.OutputView;
 
 public class MenuController {
     private final CoachService coachService;
+    private final MenuService menuService;
     private final InputView inputView;
     private final OutputView outputView;
 
-    public MenuController(CoachService coachService, InputView inputView, OutputView outputView) {
+    public MenuController(CoachService coachService, MenuService menuService, InputView inputView, OutputView outputView) {
         this.coachService = coachService;
+        this.menuService = menuService;
         this.inputView = inputView;
         this.outputView = outputView;
     }
@@ -23,6 +26,7 @@ public class MenuController {
         for (Coach coach : coaches) {
             readNotPreferredFood(coach);
         }
+        List<String> categories = selectCategory();
     }
 
     public List<Coach> readCoach() {
@@ -45,6 +49,10 @@ public class MenuController {
                 outputView.printError(e.getMessage());
             }
         }
+    }
+
+    public List<String> selectCategory() {
+        return menuService.selectCategories();
     }
 
     private <T> T retry(Supplier<T> supplier) {
