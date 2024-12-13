@@ -14,7 +14,7 @@ class CoachServiceTest {
     void 먹지_못하는_음식_추가_테스트() {
         Coach coach = new Coach("성준");
         coachService.addInedibleFoods(coach, "된장찌개,비빔밥");
-        assertThat(coach).extracting("notPreferredFood")
+        assertThat(coach).extracting("inedibleF:oods")
                 .isEqualTo(List.of("된장찌개", "비빔밥"));
     }
 
